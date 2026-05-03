@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tushar Khandelwal — Marketing Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --w:#ffffff;
+  --off:#fafafa;
+  --off2:#f4f4f4;
+  --ink:#0a0a0a;
+  --ink2:#1c1c1c;
+  --ink3:#3a3a3a;
+  --ink4:#888;
+  --ink5:#bbb;
+  --line:rgba(0,0,0,0.06);
+  --line2:rgba(0,0,0,0.1);
+  --line3:rgba(0,0,0,0.15);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--w);color:var(--ink);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(0,0,0,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.cursor.hover{width:5px;height:5px}
+.cursor-ring.hover{width:50px;height:50px;border-color:rgba(0,0,0,0.18)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--w)}
+::-webkit-scrollbar-thumb{background:var(--ink)}
+
+/* PRELOADER */
+#preloader{position:fixed;inset:0;background:var(--w);z-index:9000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;border-bottom:1px solid var(--line)}
+.pre-logo{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,7vw,6rem);color:var(--ink);font-weight:900;letter-spacing:-0.03em;overflow:hidden;line-height:1}
+.pre-logo span{display:inline-block;transform:translateY(105%);animation:slideUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.pre-logo .w2{animation-delay:0.08s;font-style:italic;font-weight:400}
+.pre-sub{font-size:0.7rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink4);opacity:0;animation:fadeIn 0.6s 0.6s ease forwards}
+.pre-progress{width:160px;height:1px;background:var(--line2);position:relative;overflow:hidden}
+.pre-progress::after{content:'';position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;animation:loadBar 1.8s cubic-bezier(0.16,1,0.3,1) 0.2s forwards}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 5vw;background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:padding 0.4s,box-shadow 0.4s}
+nav.scrolled{padding:1rem 5vw;box-shadow:0 1px 0 var(--line2)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.7rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink4);text-decoration:none;transition:color 0.25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--ink);transition:width 0.3s cubic-bezier(0.16,1,0.3,1)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-dl{font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid var(--line3);padding:0.55rem 1.3rem;transition:all 0.3s}
+.nav-dl:hover{background:var(--ink);color:var(--w)}
+
+/* KEYFRAMES */
+@keyframes slideUp{to{transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes loadBar{to{transform:scaleX(1)}}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulseRing{0%{transform:translate(-50%,-50%) scale(1);opacity:0.4}100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(32px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1)}
+.rv.on{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-36px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1)}
+.rv-l.on{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(36px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1)}
+.rv-r.on{opacity:1;transform:none}
+.rv-s{opacity:0;transform:scale(0.93);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1)}
+.rv-s.on{opacity:1;transform:none}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+.d4{transition-delay:0.4s}.d5{transition-delay:0.5s}.d6{transition-delay:0.6s}
+
+/* SECTIONS */
+section{padding:9rem 8vw;background:var(--w)}
+section.bg-off{background:var(--off)}
+.lbl{font-size:0.66rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink4);display:flex;align-items:center;gap:0.7rem;margin-bottom:1.2rem;font-weight:500}
+.lbl::before{content:'';width:22px;height:1px;background:var(--ink4);display:inline-block}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.8rem);font-weight:700;line-height:1;letter-spacing:-0.02em;color:var(--ink)}
+.stitle em{font-style:italic;font-weight:400}
+.ssub{margin-top:1rem;font-size:0.95rem;color:var(--ink4);max-width:500px;font-weight:300;line-height:1.85}
+
+/* ── HERO ── */
+#hero{padding:0;min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:var(--w)}
+.hero-bg-img{position:absolute;inset:0;z-index:0}
+.hero-bg-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);opacity:0.09;transform:scale(1.06);animation:heroBgPull 10s ease-out forwards}
+@keyframes heroBgPull{to{transform:scale(1)}}
+.hero-grid-lines{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px);background-size:80px 80px}
+.hero-body{position:relative;z-index:3;padding:0 8vw 8vh;width:100%;display:flex;flex-direction:column;padding-top:130px}
+.hero-eyebrow{font-size:0.68rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink4);display:flex;align-items:center;gap:0.9rem;opacity:0;animation:fadeIn 0.7s 2.3s ease forwards;margin-bottom:2.5rem}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--ink4);display:inline-block;transform-origin:left;animation:lineGrow 0.5s 2.6s ease forwards;transform:scaleX(0)}
+.hero-h-wrap{overflow:hidden;margin-bottom:0.3rem}
+.hero-h{font-family:'Playfair Display',serif;font-size:clamp(5rem,13vw,13rem);font-weight:900;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);transform:translateY(108%);animation:slideUp 1s cubic-bezier(0.16,1,0.3,1) 2.35s forwards;display:block}
+.hero-h.italic{font-style:italic;font-weight:400;transform:translateY(108%);animation:slideUp 1s cubic-bezier(0.16,1,0.3,1) 2.48s forwards}
+.hero-desc{font-size:clamp(0.9rem,1.5vw,1.1rem);color:var(--ink4);font-weight:300;max-width:460px;line-height:1.8;opacity:0;animation:fadeIn 0.8s 2.7s ease forwards;margin-top:2rem}
+.hero-bottom-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2.5rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--line2);opacity:0;animation:fadeIn 0.8s 2.9s ease forwards}
+.hero-stats{display:flex;gap:4rem}
+.hstat-num{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:var(--ink);line-height:1;display:block}
+.hstat-lbl{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink5);margin-top:0.25rem;display:block}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-blk{display:inline-block;padding:0.95rem 2.6rem;background:var(--ink);color:var(--w);font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color 0.4s}
+.btn-blk::before{content:'';position:absolute;inset:0;background:#333;transform:scaleX(0);transform-origin:right;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.btn-blk:hover::before{transform:scaleX(1);transform-origin:left}
+.btn-blk span{position:relative;z-index:1}
+.btn-bdr{display:inline-block;padding:0.95rem 2.6rem;background:transparent;color:var(--ink);font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line3);transition:all 0.35s}
+.btn-bdr:hover{background:var(--ink);color:var(--w);border-color:var(--ink)}
+.scroll-indicator{position:absolute;right:5vw;bottom:4rem;z-index:4;display:flex;flex-direction:column;align-items:center;gap:0.7rem;opacity:0;animation:fadeIn 0.7s 3.2s ease forwards}
+.scroll-indicator span{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink5);writing-mode:vertical-rl}
+.scroll-line-wrap{width:1px;height:56px;background:var(--line2);overflow:hidden;position:relative}
+.scroll-line-fill{position:absolute;top:-100%;left:0;right:0;height:50%;background:var(--ink3);animation:scrollFill 1.6s ease-in-out infinite}
+@keyframes scrollFill{0%{top:-50%}100%{top:150%}}
+
+/* MARQUEE */
+.marquee-wrap{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:1rem 0;overflow:hidden;background:var(--w)}
+.m-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap}
+.m-item{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink4);padding:0 2.5rem;display:flex;align-items:center;gap:2.5rem;flex-shrink:0}
+.m-dot{width:3px;height:3px;border-radius:50%;background:var(--ink5);flex-shrink:0}
+
+/* ABOUT */
+#about{display:grid;grid-template-columns:1fr 1fr;gap:9rem;align-items:center;padding:9rem 8vw}
+.about-img-col{position:relative}
+.about-frame{position:absolute;top:-16px;left:-16px;right:16px;bottom:16px;border:1px solid var(--line2);z-index:0;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1)}
+.about-img-col:hover .about-frame{transform:translate(5px,5px)}
+.about-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;position:relative;z-index:1;filter:grayscale(25%);transition:filter 0.6s}
+.about-img-col:hover .about-img{filter:grayscale(0%)}
+.about-img-tag{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem;background:linear-gradient(transparent,rgba(255,255,255,0.95));display:flex;justify-content:space-between;align-items:flex-end}
+.about-img-tag span{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink4)}
+.about-text-col{}
+.a-p{font-size:1rem;color:var(--ink3);line-height:2;font-weight:300;margin-bottom:1.3rem}
+.a-p strong{color:var(--ink);font-weight:500}
+.a-quote{font-family:'Playfair Display',serif;font-size:1.45rem;font-style:italic;font-weight:400;color:var(--ink2);border-left:2px solid var(--line3);padding-left:1.5rem;margin:2.5rem 0;line-height:1.5}
+.a-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:2rem}
+.pill{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 1rem;border:1px solid var(--line2);color:var(--ink4);transition:all 0.3s;cursor:default;position:relative;overflow:hidden}
+.pill::before{content:'';position:absolute;inset:0;background:var(--ink);transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1)}
+.pill:hover::before{transform:translateY(0)}
+.pill:hover{color:var(--w);border-color:var(--ink)}
+.pill span{position:relative;z-index:1}
+
+/* EXPERIENCE */
+#experience{background:var(--off);padding:9rem 8vw}
+.exp-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-top:5rem;align-items:start}
+.exp-img-col .exp-img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:grayscale(20%);transition:filter 0.6s,transform 0.6s}
+.exp-img:hover{filter:grayscale(0%);transform:scale(1.01)}
+.exp-img-meta{padding:1.2rem 0;border-bottom:1px solid var(--line2);display:flex;justify-content:space-between}
+.exp-img-meta span{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink4)}
+.exp-item{padding:2.8rem 0;border-bottom:1px solid var(--line);transition:padding-left 0.35s cubic-bezier(0.16,1,0.3,1);cursor:default}
+.exp-item:first-child{padding-top:0;border-top:1px solid var(--line)}
+.exp-item:hover{padding-left:0.8rem}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1rem}
+.exp-yr{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink4);background:var(--off2);padding:0.28rem 0.7rem;white-space:nowrap;flex-shrink:0}
+.exp-co{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--ink);margin-bottom:0.2rem}
+.exp-role{font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:1.2rem}
+.exp-note{font-size:0.88rem;color:var(--ink4);font-weight:300;line-height:1.75;margin-bottom:1.2rem}
+.exp-pts{list-style:none;display:flex;flex-direction:column;gap:0.65rem;margin-bottom:1.4rem}
+.exp-pts li{font-size:0.88rem;color:var(--ink3);font-weight:300;line-height:1.65;display:flex;gap:0.8rem;align-items:flex-start}
+.exp-pts li::before{content:'—';color:var(--ink5);flex-shrink:0}
+.exp-tags{display:flex;flex-wrap:wrap;gap:0.45rem}
+.etag{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.22rem 0.65rem;border:1px solid var(--line2);color:var(--ink4)}
+
+/* PROCESS */
+#process{background:var(--w);padding:9rem 8vw}
+.proc-top{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:end;margin-bottom:5rem}
+.proc-intro{font-size:0.95rem;color:var(--ink4);font-weight:300;line-height:1.9}
+.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line2);gap:1px;background:var(--line2)}
+.ps{padding:3rem 2.5rem;background:var(--w);position:relative;overflow:hidden;cursor:default;transition:background 0.4s}
+.ps:hover{background:var(--off)}
+.ps::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1)}
+.ps:hover::after{transform:scaleX(1)}
+.ps-num{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:700;color:var(--line2);line-height:1;margin-bottom:1.5rem;transition:color 0.4s}
+.ps:hover .ps-num{color:rgba(0,0,0,0.08)}
+.ps-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.7rem}
+.ps-desc{font-size:0.84rem;color:var(--ink4);font-weight:300;line-height:1.8}
+.ps-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.3rem}
+.ps-chip{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border:1px solid var(--line2);color:var(--ink5);transition:all 0.3s}
+.ps:hover .ps-chip{border-color:var(--line3);color:var(--ink4)}
+
+/* SKILLS */
+#skills{background:var(--off);padding:9rem 8vw}
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;margin-top:5rem}
+.skills-img-col{position:relative}
+.skills-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;filter:grayscale(20%);transition:filter 0.6s}
+.skills-img:hover{filter:grayscale(0%)}
+.skills-img-badge{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.8rem;background:linear-gradient(transparent,rgba(255,255,255,0.96))}
+.badge-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:var(--ink);line-height:1;display:block}
+.badge-lbl{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink4);margin-top:0.25rem;display:block}
+.skill-grp{margin-bottom:3rem}
+.skill-grp-lbl{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink4);font-weight:500;margin-bottom:1.4rem;padding-bottom:0.6rem;border-bottom:1px solid var(--line)}
+.sk-row{margin-bottom:1.4rem}
+.sk-head{display:flex;justify-content:space-between;margin-bottom:0.45rem}
+.sk-name{font-size:0.88rem;color:var(--ink2);font-weight:400}
+.sk-pct{font-family:'Playfair Display',serif;font-size:0.82rem;color:var(--ink4)}
+.sk-track{height:1px;background:var(--line2);overflow:hidden;position:relative}
+.sk-fill{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 1.5s cubic-bezier(0.16,1,0.3,1)}
+.soft-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+.soft-card{padding:1.3rem;border:1px solid var(--line);background:var(--w);transition:all 0.35s;cursor:default;position:relative;overflow:hidden}
+.soft-card::before{content:'';position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.soft-card:hover::before{transform:translateY(0)}
+.soft-card:hover .soft-ico,.soft-card:hover .soft-lbl{color:var(--w);position:relative;z-index:1}
+.soft-ico{font-size:1.2rem;display:block;margin-bottom:0.3rem;position:relative;z-index:1;transition:color 0.3s}
+.soft-lbl{font-size:0.8rem;color:var(--ink2);font-weight:400;transition:color 0.3s;position:relative;z-index:1}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--w);padding:9rem 8vw}
+.ach-top{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;margin-bottom:5rem}
+.ach-hero-img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:grayscale(15%);display:block;transition:filter 0.6s}
+.ach-hero-img:hover{filter:grayscale(0%)}
+.ach-side-text{font-size:1rem;color:var(--ink4);line-height:1.9;font-weight:300;margin-bottom:2rem}
+.ach-big-nums{display:flex;gap:3rem}
+.abn-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--ink);line-height:1;display:block}
+.abn-lbl{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink5);margin-top:0.3rem;display:block}
+.ach-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.ach-card{padding:2.5rem 2rem;border:1px solid var(--line);background:var(--w);position:relative;overflow:hidden;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s,border-color 0.3s;cursor:default}
+.ach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1)}
+.ach-card:hover{transform:translateY(-7px);box-shadow:0 20px 50px rgba(0,0,0,0.07);border-color:var(--line2)}
+.ach-card:hover::before{transform:scaleX(1)}
+.ach-ico{font-size:2rem;display:block;margin-bottom:1.2rem}
+.ach-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:0.5rem;line-height:1.3}
+.ach-desc{font-size:0.83rem;color:var(--ink4);line-height:1.75;font-weight:300}
+
+/* EDUCATION */
+#education{background:var(--off);padding:9rem 8vw}
+.edu-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:5rem}
+.edu-card{padding:3rem 2.5rem;border:1px solid var(--line);background:var(--w);position:relative;overflow:hidden;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s;cursor:default}
+.edu-card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(0,0,0,0.06)}
+.edu-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1)}
+.edu-card:hover::after{transform:scaleX(1)}
+.edu-yr{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:1rem}
+.edu-inst{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:0.3rem;line-height:1.3}
+.edu-deg{font-size:0.78rem;color:var(--ink4);margin-bottom:1.2rem;font-weight:300}
+.edu-grade{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);border:1px solid var(--line2);padding:0.3rem 0.85rem}
+
+/* CONTACT */
+#contact{background:var(--w);padding:9rem 8vw}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
+.contact-big-txt{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,4.5rem);font-weight:700;line-height:1;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.5rem}
+.contact-big-txt em{font-style:italic;font-weight:400;display:block}
+.contact-desc{font-size:0.93rem;color:var(--ink4);line-height:1.85;font-weight:300;max-width:380px;margin-bottom:2.5rem}
+.clinks{display:flex;flex-direction:column;gap:0.9rem}
+.clink{display:flex;align-items:center;gap:1rem;text-decoration:none;padding:1.1rem 1.4rem;border:1px solid var(--line);color:var(--ink3);font-size:0.87rem;transition:all 0.35s;position:relative;overflow:hidden}
+.clink::before{content:'';position:absolute;inset:0;background:var(--off);transform:translateX(-101%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.clink:hover::before{transform:translateX(0)}
+.clink:hover{border-color:var(--line3);color:var(--ink)}
+.clink-ico{font-size:1.05rem;flex-shrink:0;position:relative;z-index:1}
+.clink-body{position:relative;z-index:1}
+.clink-lbl{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink5);margin-bottom:0.1rem}
+.clink-val{font-size:0.85rem;font-weight:400}
+.form-side{}
+.f-lbl{font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink4);display:block;margin-bottom:1.8rem;font-weight:500}
+.f-field{margin-bottom:1rem}
+.f-input{width:100%;padding:0.95rem 1.2rem;background:var(--off);border:1px solid var(--line);color:var(--ink);font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:300;outline:none;transition:border-color 0.25s,background 0.25s}
+.f-input:focus{border-color:var(--line3);background:var(--w)}
+.f-input::placeholder{color:var(--ink5)}
+textarea.f-input{resize:none;height:110px}
+.f-btn{width:100%;padding:1.1rem;background:var(--ink);color:var(--w);font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;border:none;cursor:none;margin-top:0.5rem;position:relative;overflow:hidden;transition:background 0.3s}
+.f-btn::before{content:'';position:absolute;inset:0;background:#333;transform:scaleX(0);transform-origin:right;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.f-btn:hover::before{transform:scaleX(1);transform-origin:left}
+.f-btn span{position:relative;z-index:1}
+
+/* RESUME BAND */
+.resume-band{padding:3rem 8vw;background:var(--off);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.rb-text h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--ink)}
+.rb-text p{font-size:0.85rem;color:var(--ink4);font-weight:300;margin-top:0.3rem}
+.rb-btn{display:inline-flex;align-items:center;gap:0.7rem;padding:1rem 2.4rem;background:var(--ink);color:var(--w);font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:background 0.3s}
+.rb-btn:hover{background:#333}
+
+/* FOOTER */
+footer{background:var(--w);border-top:1px solid var(--line);padding:2rem 8vw;display:flex;justify-content:space-between;align-items:center}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--ink)}
+.f-copy{font-size:0.68rem;color:var(--ink5);letter-spacing:0.08em}
+
+/* FLOATING DL */
+.fdl{position:fixed;bottom:2rem;right:2rem;z-index:400;display:inline-flex;align-items:center;gap:0.6rem;padding:0.85rem 1.6rem;background:var(--ink);color:var(--w);font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;box-shadow:0 6px 24px rgba(0,0,0,0.15);transition:all 0.35s;opacity:0;transform:translateY(12px);pointer-events:none}
+.fdl.show{opacity:1;transform:none;pointer-events:auto}
+.fdl:hover{background:#333;transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,0.18)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  #about,#experience .exp-layout,.skills-layout,.contact-layout,.ach-top,.proc-top{display:block}
+  #about .about-img-col{margin-bottom:4rem}
+  .exp-layout{margin-top:3rem}
+  .exp-img-col{margin-bottom:3rem}
+  .skills-layout .skills-img-col{margin-bottom:3rem;width:60%}
+  .ach-top .ach-hero-img{margin-bottom:2rem}
+  .proc-grid,.ach-cards{grid-template-columns:1fr 1fr}
+  .edu-cards{grid-template-columns:1fr}
+  .contact-layout .contact-big-txt-wrap{margin-bottom:3rem}
+  section{padding:6rem 6vw}
+  .hero-stats{gap:2rem}
+}
+@media(max-width:600px){
+  .nav-links,.nav-dl{display:none}
+  .proc-grid,.ach-cards,.soft-grid{grid-template-columns:1fr}
+  .hero-h{font-size:clamp(3.5rem,15vw,7rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo"><span>Tushar</span>&nbsp;<span class="w2">Khandelwal</span></div>
+  <div class="pre-sub">Marketing Professional · Indore, India</div>
+  <div class="pre-progress"></div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">TK.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="Tushar_Khandelwal.pdf" download class="nav-dl">⬇ Resume</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-img">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1800&q=80&auto=format&fit=crop" alt="Marketing">
+  </div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-body">
+    <div class="hero-eyebrow">Marketing Professional · Indore, India</div>
+    <div class="hero-h-wrap"><span class="hero-h">Tushar</span></div>
+    <div class="hero-h-wrap"><span class="hero-h italic">Khandelwal</span></div>
+    <p class="hero-desc">Brand strategy. Market research. Product growth.<br>Building businesses through sharp, human-centred marketing thinking.</p>
+    <div class="hero-bottom-row">
+      <div class="hero-stats">
+        <div><span class="hstat-num" data-target="300">0</span><span class="hstat-lbl">Products Launched</span></div>
+        <div><span class="hstat-num" data-target="20">0</span><span class="hstat-lbl">% Traffic Growth</span></div>
+        <div><span class="hstat-num" data-target="2">0</span><span class="hstat-lbl">Years Experience</span></div>
+      </div>
+      <div class="hero-btns">
+        <a href="#about" class="btn-blk"><span>Discover More</span></a>
+        <a href="#contact" class="btn-bdr">Let's Talk</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line-wrap"><div class="scroll-line-fill"></div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="m-track">
+    <div class="m-item">Brand Strategy<span class="m-dot"></span></div>
+    <div class="m-item">Market Research<span class="m-dot"></span></div>
+    <div class="m-item">Product Management<span class="m-dot"></span></div>
+    <div class="m-item">B2B Marketplace<span class="m-dot"></span></div>
+    <div class="m-item">Consumer Behaviour<span class="m-dot"></span></div>
+    <div class="m-item">Campaign Planning<span class="m-dot"></span></div>
+    <div class="m-item">Catalogue Strategy<span class="m-dot"></span></div>
+    <div class="m-item">Trade Operations<span class="m-dot"></span></div>
+    <div class="m-item">Brand Strategy<span class="m-dot"></span></div>
+    <div class="m-item">Market Research<span class="m-dot"></span></div>
+    <div class="m-item">Product Management<span class="m-dot"></span></div>
+    <div class="m-item">B2B Marketplace<span class="m-dot"></span></div>
+    <div class="m-item">Consumer Behaviour<span class="m-dot"></span></div>
+    <div class="m-item">Campaign Planning<span class="m-dot"></span></div>
+    <div class="m-item">Catalogue Strategy<span class="m-dot"></span></div>
+    <div class="m-item">Trade Operations<span class="m-dot"></span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-col rv-l">
+    <div class="about-frame"></div>
+    <img class="about-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop" alt="Tushar Khandelwal">
+    <div class="about-img-tag">
+      <span>Marketing Professional</span>
+      <span>Indore, India</span>
+    </div>
+  </div>
+  <div class="about-text-col">
+    <p class="lbl rv">Who I Am</p>
+    <h2 class="stitle rv d1">Building brands<br><em>that mean something</em></h2>
+    <p class="a-p rv d2">I'm <strong>Tushar Khandelwal</strong> — a marketing-focused professional from Indore with a drive to understand what makes brands grow, products sell, and people take notice. My foundation is in <strong>B2B marketplace growth and product positioning</strong>, and I'm building toward a career in broader marketing — spanning brand strategy, consumer research, and campaign thinking.</p>
+    <p class="a-p rv d2">At Kuber Impex Ltd., I built an entire product catalogue from scratch, drove a <strong>20% increase in marketplace traffic</strong>, and managed vendor and client relationships end-to-end — a full positioning and messaging exercise in disguise.</p>
+    <blockquote class="a-quote rv d3">"Marketing is the art of making people feel the right thing at the right moment."</blockquote>
+    <div class="a-pills rv d4">
+      <span class="pill"><span>Brand Thinking</span></span>
+      <span class="pill"><span>Market Research</span></span>
+      <span class="pill"><span>Product Strategy</span></span>
+      <span class="pill"><span>Consumer Behaviour</span></span>
+      <span class="pill"><span>B2B Commerce</span></span>
+      <span class="pill"><span>Campaign Planning</span></span>
+      <span class="pill"><span>Storytelling</span></span>
+      <span class="pill"><span>Team Leadership</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="bg-off">
+  <p class="lbl rv">Work History</p>
+  <h2 class="stitle rv d1">Where I've <em>made impact</em></h2>
+  <div class="exp-layout">
+    <div class="exp-img-col rv-s">
+      <img class="exp-img" src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=900&q=80&auto=format&fit=crop" alt="Workplace">
+      <div class="exp-img-meta">
+        <span>Professional Experience</span>
+        <span>2024 – Present</span>
+      </div>
+    </div>
+    <div class="exp-entries">
+      <div class="exp-item rv d1">
+        <div class="exp-header">
+          <div>
+            <div class="exp-co">Kuber Impex Ltd.</div>
+            <div class="exp-role">Marketing & Catalogue Strategist · Co-ordinator Head</div>
+          </div>
+          <span class="exp-yr">Jan 2025</span>
+        </div>
+        <p class="exp-note">B2B marketplace company. Built product presence from zero and grew brand visibility across IndiaMart — applying marketing thinking to positioning, messaging, and buyer acquisition.</p>
+        <ul class="exp-pts">
+          <li>Drove <strong>20% growth</strong> in traffic and inbound leads through optimised titles, descriptions, and strategic category placements</li>
+          <li>Built a catalogue of <strong>300–400 product listings</strong> from scratch, structured for maximum discoverability and conversion</li>
+          <li>Managed direct client and vendor communication ensuring quality supply aligned with brand promise</li>
+          <li>Gained deep exposure to B2B buyer behaviour, trade operations, and marketplace algorithm dynamics</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="etag">Product Positioning</span><span class="etag">IndiaMart</span><span class="etag">B2B Marketing</span><span class="etag">Catalogue Strategy</span><span class="etag">Market Research</span>
+        </div>
+      </div>
+      <div class="exp-item rv d2">
+        <div class="exp-header">
+          <div>
+            <div class="exp-co">Mahesh Bhatia Rentals</div>
+            <div class="exp-role">Equipment & Operations Coordinator</div>
+          </div>
+          <span class="exp-yr">2024</span>
+        </div>
+        <p class="exp-note">Professional camera and equipment rental service. Built core operational discipline, logistics thinking, and team coordination skills.</p>
+        <ul class="exp-pts">
+          <li>Tracked and organised high-value equipment inventory across shoots — zero delays on delivery</li>
+          <li>Coordinated cross-functional teams for smooth shoot execution and equipment allocation</li>
+          <li>Gained hands-on exposure to supply chain thinking and time-critical operations</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="etag">Operations</span><span class="etag">Logistics</span><span class="etag">Team Coordination</span><span class="etag">Supply Chain</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="proc-top">
+    <div>
+      <p class="lbl rv">How I Think</p>
+      <h2 class="stitle rv d1">My Marketing <em>Process</em></h2>
+    </div>
+    <p class="proc-intro rv d2">Every result I've delivered follows a clear, disciplined method. Not guesswork — a repeatable system of research, strategy, execution, and reflection that compounds over time.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="ps rv"><div class="ps-num">01</div><h3 class="ps-title">Research & Insight</h3><p class="ps-desc">Before any strategy, I study the market. Who are the buyers? What do they search for? What are competitors missing? Insight is the foundation of everything that follows.</p><div class="ps-chips"><span class="ps-chip">Market Analysis</span><span class="ps-chip">Buyer Personas</span><span class="ps-chip">Competitor Research</span></div></div>
+    <div class="ps rv d1"><div class="ps-num">02</div><h3 class="ps-title">Positioning & Message</h3><p class="ps-desc">What makes this product or brand different? I craft positioning that is specific, credible, and resonant — not generic. The right message to the right person changes everything.</p><div class="ps-chips"><span class="ps-chip">Brand Positioning</span><span class="ps-chip">Messaging Architecture</span><span class="ps-chip">Value Proposition</span></div></div>
+    <div class="ps rv d2"><div class="ps-num">03</div><h3 class="ps-title">Content & Catalogue</h3><p class="ps-desc">Content that converts. Titles, descriptions, and specs written to inform, persuade, and rank — backed by research, not gut instinct. Every word earns its place.</p><div class="ps-chips"><span class="ps-chip">Content Strategy</span><span class="ps-chip">Copywriting</span><span class="ps-chip">SEO Thinking</span></div></div>
+    <div class="ps rv d1"><div class="ps-num">04</div><h3 class="ps-title">Execution & Launch</h3><p class="ps-desc">Strategy without execution is just ideas. I build systems for consistent, quality-controlled output — and follow through to completion, every single time, without cutting corners.</p><div class="ps-chips"><span class="ps-chip">Project Management</span><span class="ps-chip">Quality Control</span><span class="ps-chip">Go-to-Market</span></div></div>
+    <div class="ps rv d2"><div class="ps-num">05</div><h3 class="ps-title">Track & Optimise</h3><p class="ps-desc">What gets measured gets improved. I monitor performance, identify what's working, and iterate — turning good results into exceptional ones. This is where 20% traffic growth came from.</p><div class="ps-chips"><span class="ps-chip">Performance Tracking</span><span class="ps-chip">Iteration</span><span class="ps-chip">Insight-Led Growth</span></div></div>
+    <div class="ps rv d3"><div class="ps-num">06</div><h3 class="ps-title">Communicate & Align</h3><p class="ps-desc">Marketing lives at the intersection of people. I communicate clearly with clients, vendors, and teams — keeping everyone aligned and moving confidently in the same direction.</p><div class="ps-chips"><span class="ps-chip">Stakeholder Mgmt</span><span class="ps-chip">Client Relations</span><span class="ps-chip">Team Alignment</span></div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="bg-off">
+  <p class="lbl rv">Capabilities</p>
+  <h2 class="stitle rv d1">Skills built on <em>real work</em></h2>
+  <div class="skills-layout">
+    <div class="skills-img-col rv-s d1">
+      <img class="skills-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80&auto=format&fit=crop" alt="Strategy session">
+      <div class="skills-img-badge">
+        <span class="badge-num">20%</span>
+        <span class="badge-lbl">Traffic Growth Delivered</span>
+      </div>
+    </div>
+    <div class="skills-bars">
+      <div class="skill-grp">
+        <div class="skill-grp-lbl rv">Marketing & Strategy</div>
+        <div class="sk-row rv"><div class="sk-head"><span class="sk-name">Product Positioning & Messaging</span><span class="sk-pct">90%</span></div><div class="sk-track"><div class="sk-fill" data-pct="0.9"></div></div></div>
+        <div class="sk-row rv d1"><div class="sk-head"><span class="sk-name">Market Research & Analysis</span><span class="sk-pct">85%</span></div><div class="sk-track"><div class="sk-fill" data-pct="0.85"></div></div></div>
+        <div class="sk-row rv d2"><div class="sk-head"><span class="sk-name">Catalogue & Content Strategy</span><span class="sk-pct">92%</span></div><div class="sk-track"><div class="sk-fill" data-pct="0.92"></div></div></div>
+        <div class="sk-row rv d3"><div class="sk-head"><span class="sk-name">B2B Marketplace Operations</span><span class="sk-pct">88%</span></div><div class="sk-track"><div class="sk-fill" data-pct="0.88"></div></div></div>
+        <div class="sk-row rv d4"><div class="sk-head"><span class="sk-name">Vendor & Client Management</span><span class="sk-pct">82%</span></div><div class="sk-track"><div class="sk-fill" data-pct="0.82"></div></div></div>
+      </div>
+      <div class="skill-grp">
+        <div class="skill-grp-lbl rv">Soft Skills</div>
+        <div class="soft-grid">
+          <div class="soft-card rv"><span class="soft-ico">💡</span><span class="soft-lbl">Strategic Thinking</span></div>
+          <div class="soft-card rv d1"><span class="soft-ico">🔍</span><span class="soft-lbl">Analytical Mind</span></div>
+          <div class="soft-card rv d2"><span class="soft-ico">🤝</span><span class="soft-lbl">Client Relations</span></div>
+          <div class="soft-card rv d3"><span class="soft-ico">⚡</span><span class="soft-lbl">Fast Execution</span></div>
+          <div class="soft-card rv"><span class="soft-ico">🎯</span><span class="soft-lbl">Result-Oriented</span></div>
+          <div class="soft-card rv d1"><span class="soft-ico">👥</span><span class="soft-lbl">Team Leadership</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="lbl rv">Recognition</p>
+  <h2 class="stitle rv d1">Achievements & <em>milestones</em></h2>
+  <div class="ach-top">
+    <img class="ach-hero-img rv-l" src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80&auto=format&fit=crop" alt="Achievement">
+    <div class="rv-r">
+      <p class="ach-side-text">From leading college events to driving real business metrics at work — a consistent track record of taking ownership, showing up, and delivering results that matter.</p>
+      <div class="ach-big-nums">
+        <div><span class="abn-num">3×</span><span class="abn-lbl">National Presenter</span></div>
+        <div><span class="abn-num">5+</span><span class="abn-lbl">Major Events Led</span></div>
+        <div><span class="abn-num">20%</span><span class="abn-lbl">Traffic Growth</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ach-cards">
+    <div class="ach-card rv"><span class="ach-ico">🏆</span><h3 class="ach-title">Co-ordinator Head, Kuber Impex</h3><p class="ach-desc">Recognised for leadership across departments — bridging vendors, clients, and internal teams to keep operations running seamlessly.</p></div>
+    <div class="ach-card rv d1"><span class="ach-ico">🎤</span><h3 class="ach-title">3× National Conference Presenter</h3><p class="ach-desc">Presented research at national-level college conferences three times — building sharp communication and persuasion skills.</p></div>
+    <div class="ach-card rv d2"><span class="ach-ico">📈</span><h3 class="ach-title">20% Marketplace Traffic Growth</h3><p class="ach-desc">Delivered measurable results through strategic product positioning and content optimisation across IndiaMart.</p></div>
+    <div class="ach-card rv d1"><span class="ach-ico">🎪</span><h3 class="ach-title">Fiesta Fair Organizer Head</h3><p class="ach-desc">Led end-to-end organisation of the college's flagship fair — event planning, vendor coordination, and managing large teams.</p></div>
+    <div class="ach-card rv d2"><span class="ach-ico">🌱</span><h3 class="ach-title">Community Drive Leader</h3><p class="ach-desc">Organised plantation drives and blood donation camps — demonstrating social initiative and community leadership.</p></div>
+    <div class="ach-card rv d3"><span class="ach-ico">🎵</span><h3 class="ach-title">2× Annual Singing Performer</h3><p class="ach-desc">Selected as a performing member for two consecutive college events — reflecting creativity and stage confidence.</p></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="bg-off">
+  <p class="lbl rv">Academic</p>
+  <h2 class="stitle rv d1">Education & <em>Foundation</em></h2>
+  <div class="edu-cards">
+    <div class="edu-card rv d1">
+      <span class="edu-yr">2023 – 2025</span>
+      <h3 class="edu-inst">St. Paul's Institute of Professional Studies</h3>
+      <p class="edu-deg">Indore, M.P. · Bachelor's Degree</p>
+      <span class="edu-grade">⭐ Grade: A</span>
+    </div>
+    <div class="edu-card rv d2">
+      <span class="edu-yr">2022 – 2023</span>
+      <h3 class="edu-inst">St. Arnold's Hr. Sec. School</h3>
+      <p class="edu-deg">Indore, M.P. · Higher Secondary (HSC)</p>
+      <span class="edu-grade">📋 Grade: A</span>
+    </div>
+    <div class="edu-card rv d3">
+      <span class="edu-yr">2020 – 2021</span>
+      <h3 class="edu-inst">St. Arnold's Hr. Sec. School</h3>
+      <p class="edu-deg">Indore, M.P. · Secondary (SSC)</p>
+      <span class="edu-grade">📋 Grade: A</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-layout">
+    <div class="contact-big-txt-wrap rv-l">
+      <h2 class="contact-big-txt">Open to<br><em>Opportunities</em></h2>
+      <p class="contact-desc">Whether you're building a brand, growing a product, or looking for someone who'll take full ownership — let's talk.</p>
+      <div class="clinks">
+        <a href="mailto:tkhandelwal.work@gmail.com" class="clink"><span class="clink-ico">📧</span><div class="clink-body"><div class="clink-lbl">Email</div><div class="clink-val">tkhandelwal.work@gmail.com</div></div></a>
+        <a href="tel:+919425350014" class="clink"><span class="clink-ico">📞</span><div class="clink-body"><div class="clink-lbl">Phone</div><div class="clink-val">+91 9425350014</div></div></a>
+        <a href="https://www.linkedin.com/in/tkhandelwal-work" target="_blank" class="clink"><span class="clink-ico">💼</span><div class="clink-body"><div class="clink-lbl">LinkedIn</div><div class="clink-val">linkedin.com/in/tkhandelwal-work</div></div></a>
+        <a href="#" class="clink"><span class="clink-ico">📍</span><div class="clink-body"><div class="clink-lbl">Location</div><div class="clink-val">Indore, Madhya Pradesh, India</div></div></a>
+      </div>
+    </div>
+    <div class="form-side rv-r">
+      <span class="f-lbl">Send a message</span>
+      <div class="f-field"><input type="text" class="f-input" placeholder="Your Name"></div>
+      <div class="f-field"><input type="email" class="f-input" placeholder="Your Email"></div>
+      <div class="f-field"><input type="text" class="f-input" placeholder="Subject"></div>
+      <div class="f-field"><textarea class="f-input" placeholder="Your message..."></textarea></div>
+      <button class="f-btn" onclick="handleSend(this)"><span>Send Message →</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME BAND -->
+<div class="resume-band rv">
+  <div class="rb-text">
+    <h3>Download My Resume</h3>
+    <p>Full details on experience, skills, and achievements — in one clean document.</p>
+  </div>
+  <a href="Tushar_Khandelwal.pdf" download class="rb-btn">⬇ Download CV</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">TK.</div>
+  <div class="f-copy">© 2025 Tushar Khandelwal · Indore, India · Marketing Professional</div>
+</footer>
+
+<!-- FLOATING DL -->
+<a href="Tushar_Khandelwal.pdf" download class="fdl" id="floatDl">⬇ CV</a>
+
+<script>
+/* PRELOADER */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const pre = document.getElementById('preloader');
+    pre.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    pre.style.opacity = '0';
+    pre.style.transform = 'translateY(-8px)';
+    setTimeout(() => pre.style.display = 'none', 750);
+  }, 2100);
+});
+
+/* CURSOR */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('a,button,.pill,.soft-card,.ach-card,.ps,.edu-card,.exp-item,.clink').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { cur.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+/* NAV + FLOAT DL */
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 60);
+  document.getElementById('floatDl').classList.toggle('show', scrollY > 500);
+});
+
+/* SCROLL REVEAL */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el => ro.observe(el));
+
+/* SKILL BARS */
+const bro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.sk-fill').forEach((b, i) => {
+        setTimeout(() => { b.style.transform = `scaleX(${b.dataset.pct})`; }, i * 180 + 150);
+      });
+      bro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('#skills').forEach(el => bro.observe(el));
+
+/* HERO COUNTER */
+function countUp(el, target) {
+  let start = null;
+  (function step(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / 2000, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * target);
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  })(performance.now());
+}
+const cro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-target]').forEach(el => countUp(el, +el.dataset.target));
+      cro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.hero-stats').forEach(el => cro.observe(el));
+
+/* PARALLAX HERO BG */
+window.addEventListener('scroll', () => {
+  const img = document.querySelector('.hero-bg-img img');
+  if (img && scrollY < innerHeight) img.style.transform = `scale(1) translateY(${scrollY * 0.12}px)`;
+});
+
+/* FORM */
+function handleSend(btn) {
+  const s = btn.querySelector('span');
+  const orig = s.textContent;
+  s.textContent = 'Sent ✓';
+  btn.style.background = '#2a5a3a';
+  btn.disabled = true;
+  setTimeout(() => { s.textContent = orig; btn.style.background = ''; btn.disabled = false; }, 3500);
+}
+</script>
+</body>
+</html>
